@@ -1,5 +1,7 @@
-# Nagyon regen programoztam pythopnban, nem tudnam magamtol elkesziteni a projektet, tutorial alapjan megyek vegig.
-# Forras: https://realpython.com/python-ai-neural-network/
+# Sajat neuralis halo fejlesztes pythonban 
+
+Nagyon regen programoztam pythopnban, nem tudnam magamtol elkesziteni a projektet, tutorial alapjan megyek vegig.
+Forras: https://realpython.com/python-ai-neural-network/
 
 Tutorial:
 Terminalban hozzuk letre a virtualis kornyezetet ezzel a parancsal: python -m venv .venv
