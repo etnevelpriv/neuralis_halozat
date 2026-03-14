@@ -1,6 +1,10 @@
 # Nagyon regen programoztam pythopnban, nem tudnam magamtol elkesziteni a projektet, tutorial alapjan megyek vegig.
 # Forras: https://realpython.com/python-ai-neural-network/
 
+# Projekthez szukseges hattertudas :
+# Linearis algebra: Vektorok, azok mukodese, a skalaris szorzat, matrixok
+# Calculus: Hatarertek, differencialszamitas, derivalas, gradiens, parcialis derivalas, lancszabaly, euler szam, sigmoid fuggveny
+
 # Projekthez kapcsolodo altalanos fogalmak
 # Skalaris szorzat: Ket vektorhoz egy valos szamot rendel. Megmutatja, hogy az egyik vektor hogyan viszonyul a masikhoz. A 2 vektornak ugyan olyan hosszunak kell lennie (jelen esetben ez azt jelenti, hogy ugyan annyi adatbol kell allnia a tombnek). Ha 0 az eredmeny, akkor merolegesek egymasra a vektorok.
 
