@@ -8,15 +8,28 @@
 # Projekthez kapcsolodo altalanos fogalmak
 # Skalaris szorzat: Ket vektorhoz egy valos szamot rendel. Megmutatja, hogy az egyik vektor hogyan viszonyul a masikhoz. A 2 vektornak ugyan olyan hosszunak kell lennie (jelen esetben ez azt jelenti, hogy ugyan annyi adatbol kell allnia a tombnek). Ha 0 az eredmeny, akkor merolegesek egymasra a vektorok.
 
+"""
+Elkeszitjuk a bemeneti adatok listajat es a sulyok listajat
+Az input vektor es a sulyvektorbol keszitunk skalaris szorzatot, majd hozzaadjuk a bias-t, amit elmentunk a dot productba. (elso layer)
+Elvegezzuk a sigmoid egyenletet (masodik layer)
+A masodik layer visszateritesi erteke a prediction maga
+"""
+
 # Matematikai muveletek szamitasat vagyunk kepesek vegezni a numpy csomag beepitett fuggvenyeivel.
 import numpy as np
 
 # Bemeneti adatok tombje, amit kepesek vagyunk vektorkent ertelmezni jelen esetben.
-input_vector = [1.72, 1.23]
+# input_vector = [1.72, 1.23]
+input_vector = np.array([1.72, 1.23]) # numpy array megkonnyiti a muveleteket. Gyorsabb, tovabba matrix muveletekre konnyebben lehet alkalmazni
 
 # Sulyvektorok. Azt mutatjak meg, hogy mennyire mervado a bemeneti adat erteke. Ha a bemeneti tomb valamelyik adatahoz 0 erteku sulyt csatolunk, akkor az a bemeneti ertek nem fog szamitani.
-weights_1 = [1.26, 0]
-weights_2 = [2.17, 0.32]
+# weights_1 = [1.26, 0]
+# weights_2 = [2.17, 0.32]
+weights_1 = np.array([1.26, 0])
+weights_2 = np.array([2.17, 0.32])
+
+# Bias az az ertek, amely segit, hogy a modell ne csak az origo kozelebe tudjon loni, hisz ezzel toljuk el
+bias = np.array([0.0])
 
 # A kommentezett resz ugyan azt csinalja, mint az importalt csomag beepitett fuggvenye. Itt manualis szamoljuk a skalaris szorzatot, az np.dot pedig beepitetten teszi ugyan ezt a megadott array-ekbol.
 """
@@ -26,7 +39,21 @@ dot_product1 = first_indexes_mult + second_indexes_mult
 """
 
 # Skalaris szorzat ertekenek szamitasa. A bemeneti adatok es a sulyvektor osszefuggeset mutatja minel inkabb tavolodik a 0-tol, annal nagyobb az osszefugges (annal inkabb parhuzamos a 2 vektor).
-dot_product1 = np.dot(input_vector, weights_1)
-dot_product2 = np.dot(input_vector, weights_2)  
+# dot_product1 = np.dot(input_vector, weights_1)
+# dot_product2 = np.dot(input_vector, weights_2)
 
-print(dot_product1, dot_product2)
+# Ugyan ugy skalaris szorzat szamitasa, csak fuggvenybe rakva, biast is hozzaadja
+def calcDotProduct(input_vector, weights_1, bias):
+    return (np.dot(input_vector, weights_1) + bias)
+
+# Pontos matematikai hatteret nem tudom, mert nem tanultam calculust sohasem, viszont tudom, hogy valoszinuseg szamitashoz lehet alkalmazni, hisz 0 es 1 koze teszi az erteket
+def calcSigmoid(x):
+    return ( 1 / (1 + np.exp(-x)) )
+
+# Ez az egy fuggveny futtatja le az egeszet, csak meghivja a tobbi fuggvenyt es layerkent kezeli azokat
+def makePrediction(input, weight, bias):
+    layer_1 = calcDotProduct(input, weight, bias)
+    layer_2 = calcSigmoid(layer_1)
+    return layer_2
+
+print(makePrediction(input_vector, weights_1, bias))
