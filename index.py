@@ -12,7 +12,7 @@
 Elkeszitjuk a bemeneti adatok listajat es a sulyok listajat
 Az input vektor es a sulyvektorbol keszitunk skalaris szorzatot, majd hozzaadjuk a bias-t, amit elmentunk a dot productba. (elso layer)
 Elvegezzuk a sigmoid egyenletet (masodik layer)
-A masodik layer visszateritesi erteke a prediction maga
+A masodik layer visszateritesi erteke a prediction maga, ezt elmentjuk egy valtozoba
 """
 
 # Matematikai muveletek szamitasat vagyunk kepesek vegezni a numpy csomag beepitett fuggvenyeivel.
@@ -55,5 +55,12 @@ def makePrediction(input, weight, bias):
     layer_1 = calcDotProduct(input, weight, bias)
     layer_2 = calcSigmoid(layer_1)
     return layer_2
+# Elmentjuk egy valtozoba a predictiont
+prediction = makePrediction(input_vector, weights_1, bias)
 
-print(makePrediction(input_vector, weights_1, bias))
+# A vart kimenetet adjuk meg es megmerjuk a hiba merteket.
+target = 0
+mse = np.square(prediction - target) # A hiba merteket negyzetre emeljuk, igy mindig pozitiv lesz a hiba, es a nagy hibakat sokkal jobban bunteti, mig a kicsiket lekicsinyiti
+print(f"Prediction: {prediction}; Error: {mse}")
+# Ha "prediction - target" az kisebb, mint 0, akkor novelni kell az erteket, ha nagyobb, akkor csokkenteni kell. 0-hoz kozeli allapot a megfelelo.
+# Annak erdekeben, hogy tudjuk melyik iranyba kell ezt az erteket novelni, derivalni kell. En nem tudok derivalni, de a megadott oldal tokeletesen leirjam hogy mit kell tudni. : ' the derivative of xⁿ is nx⁽ⁿ⁻¹⁾ '. Ebbol kovetkezik , hogy jelen esetunkben a hiba derivalt erteke 2 * (prediction - target)
