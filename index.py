@@ -60,7 +60,9 @@ prediction = makePrediction(input_vector, weights_1, bias)
 
 # A vart kimenetet adjuk meg es megmerjuk a hiba merteket.
 target = 0
-mse = np.square(prediction - target) # A hiba merteket negyzetre emeljuk, igy mindig pozitiv lesz a hiba, es a nagy hibakat sokkal jobban bunteti, mig a kicsiket lekicsinyiti
+base_err = prediction - target
+mse = np.square(base_err) # A hiba merteket negyzetre emeljuk, igy mindig pozitiv lesz a hiba, es a nagy hibakat sokkal jobban bunteti, mig a kicsiket lekicsinyiti
 print(f"Prediction: {prediction}; Error: {mse}")
 # Ha "prediction - target" az kisebb, mint 0, akkor novelni kell az erteket, ha nagyobb, akkor csokkenteni kell. 0-hoz kozeli allapot a megfelelo.
 # Annak erdekeben, hogy tudjuk melyik iranyba kell ezt az erteket novelni, derivalni kell. En nem tudok derivalni, de a megadott oldal tokeletesen leirjam hogy mit kell tudni. : ' the derivative of xⁿ is nx⁽ⁿ⁻¹⁾ '. Ebbol kovetkezik , hogy jelen esetunkben a hiba derivalt erteke 2 * (prediction - target)
+print(f"The derivated value of the error: {2 * (base_err)}")
