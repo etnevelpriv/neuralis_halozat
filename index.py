@@ -31,6 +31,9 @@ weights_2 = np.array([2.17, 0.32])
 # Bias az az ertek, amely segit, hogy a modell ne csak az origo kozelebe tudjon loni, hisz ezzel toljuk el
 bias = np.array([0.0])
 
+# Elvart kimenetet athuztam ide, hisz konstans
+target = 0
+
 # A kommentezett resz ugyan azt csinalja, mint az importalt csomag beepitett fuggvenye. Itt manualis szamoljuk a skalaris szorzatot, az np.dot pedig beepitetten teszi ugyan ezt a megadott array-ekbol.
 """
 first_indexes_mult = input_vector[0] * weights_1[0]
@@ -55,14 +58,27 @@ def makePrediction(input, weight, bias):
     layer_1 = calcDotProduct(input, weight, bias)
     layer_2 = calcSigmoid(layer_1)
     return layer_2
-# Elmentjuk egy valtozoba a predictiont
-prediction = makePrediction(input_vector, weights_1, bias)
 
 # A vart kimenetet adjuk meg es megmerjuk a hiba merteket.
-target = 0
-base_err = prediction - target
-mse = np.square(base_err) # A hiba merteket negyzetre emeljuk, igy mindig pozitiv lesz a hiba, es a nagy hibakat sokkal jobban bunteti, mig a kicsiket lekicsinyiti
-print(f"Prediction: {prediction}; Error: {mse}")
-# Ha "prediction - target" az kisebb, mint 0, akkor novelni kell az erteket, ha nagyobb, akkor csokkenteni kell. 0-hoz kozeli allapot a megfelelo.
-# Annak erdekeben, hogy tudjuk melyik iranyba kell ezt az erteket novelni, derivalni kell. En nem tudok derivalni, de a megadott oldal tokeletesen leirjam hogy mit kell tudni. : ' the derivative of xⁿ is nx⁽ⁿ⁻¹⁾ '. Ebbol kovetkezik , hogy jelen esetunkben a hiba derivalt erteke 2 * (prediction - target)
-print(f"The derivated value of the error: {2 * (base_err)}")
+def calcErr(prediction, target):
+    base_err = prediction - target
+    mse = np.square(base_err) # A hiba merteket negyzetre emeljuk, igy mindig pozitiv lesz a hiba, es a nagy hibakat sokkal jobban bunteti, mig a kicsiket lekicsinyiti
+    print(f"Prediction: {prediction}; Error: {mse}")
+    # Ha "prediction - target" az kisebb, mint 0, akkor novelni kell az erteket, ha nagyobb, akkor csokkenteni kell. 0-hoz kozeli allapot a megfelelo.
+    # Annak erdekeben, hogy tudjuk melyik iranyba kell ezt az erteket novelni, derivalni kell. En nem tudok derivalni, de a megadott oldal tokeletesen leirjam hogy mit kell tudni. : ' the derivative of xⁿ is nx⁽ⁿ⁻¹⁾ '. Ebbol kovetkezik , hogy jelen esetunkben a hiba derivalt erteke 2 * (prediction - target)    
+    derivated_value = 2 * base_err
+    print(f"The derivated value of the error: {2 * (base_err)}")
+    if derivated_value > 0.02:
+        weights_1[0] = weights_1[0] - 0.02
+        prediction = makePrediction(input_vector, weights_1, bias)
+        calcErr(prediction, target)
+    elif derivated_value < -0.02:
+        weights_1[0] = weights_1[0] - 0.02
+        prediction = makePrediction(input_vector, weights_1, bias)
+        calcErr(prediction, target)
+    else:
+        print('The prediction is successfull')
+
+# Elmentjuk egy valtozoba a predictiont
+prediction = makePrediction(input_vector, weights_1, bias)
+calcErr(prediction, target)
