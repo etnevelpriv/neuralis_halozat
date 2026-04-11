@@ -1,6 +1,6 @@
 # Sajat neuralis halo fejlesztes pythonban 
 
-Nagyon regen programoztam pythopnban, nem tudnam magamtol elkesziteni a projektet, tutorial alapjan megyek vegig.
+Nagyon regen programoztam pythopnban, nem tudnam magamtol elkesziteni a projektet, tutorial alapjan megyek egy darabig, majd ai segitseget kerem es ertelmezem a kodot (kommentekben kifejtem a tudasomat)
 Forras: https://realpython.com/python-ai-neural-network/
 
 Tutorial:
