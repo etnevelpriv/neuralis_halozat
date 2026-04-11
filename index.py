@@ -46,16 +46,16 @@ dot_product1 = first_indexes_mult + second_indexes_mult
 # dot_product2 = np.dot(input_vector, weights_2)
 
 # Ugyan ugy skalaris szorzat szamitasa, csak fuggvenybe rakva, biast is hozzaadja
-def calcDotProduct(input_vector, weights_1, bias):
-    return (np.dot(input_vector, weights_1) + bias)
+def calcDotProduct(input_vector, weight_vector, bias):
+    return (np.dot(input_vector, weight_vector) + bias)
 
 # Pontos matematikai hatteret nem tudom, mert nem tanultam calculust sohasem, viszont tudom, hogy valoszinuseg szamitashoz lehet alkalmazni, hisz 0 es 1 koze teszi az erteket
 def calcSigmoid(x):
     return ( 1 / (1 + np.exp(-x)) )
 
 # Ez az egy fuggveny futtatja le az egeszet, csak meghivja a tobbi fuggvenyt es layerkent kezeli azokat
-def makePrediction(input, weight, bias):
-    layer_1 = calcDotProduct(input, weight, bias)
+def makePrediction(input_vector, weight_vector, bias):
+    layer_1 = calcDotProduct(input_vector, weight_vector, bias)
     layer_2 = calcSigmoid(layer_1)
     return layer_2
 
@@ -67,13 +67,13 @@ def calcErr(prediction, target):
     # Ha "prediction - target" az kisebb, mint 0, akkor novelni kell az erteket, ha nagyobb, akkor csokkenteni kell. 0-hoz kozeli allapot a megfelelo.
     # Annak erdekeben, hogy tudjuk melyik iranyba kell ezt az erteket novelni, derivalni kell. En nem tudok derivalni, de a megadott oldal tokeletesen leirjam hogy mit kell tudni. : ' the derivative of xⁿ is nx⁽ⁿ⁻¹⁾ '. Ebbol kovetkezik , hogy jelen esetunkben a hiba derivalt erteke 2 * (prediction - target)    
     derivated_value = 2 * base_err
-    print(f"The derivated value of the error: {2 * (base_err)}")
+    print(f"The derivated value of the error: {derivated_value}")
     if derivated_value > 0.02:
         weights_1[0] = weights_1[0] - 0.02
         prediction = makePrediction(input_vector, weights_1, bias)
         calcErr(prediction, target)
     elif derivated_value < -0.02:
-        weights_1[0] = weights_1[0] - 0.02
+        weights_1[0] = weights_1[0] + 0.02
         prediction = makePrediction(input_vector, weights_1, bias)
         calcErr(prediction, target)
     else:
