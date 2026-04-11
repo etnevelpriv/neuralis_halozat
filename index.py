@@ -88,4 +88,5 @@ for epoch in range(epochs):
     if epoch % 100 == 0:
         print(f"Epoch: {epoch}\nPrediction: {prediction}\nError: {mse}\nWeights: {weights_1}\nBias: {bias}\n{"-" * 30}")
 
+
 print(f"Final prediction: {makePrediction(input_vector, weights_1, bias)}\nFinal weights: {weights_1}\n Final bias: {bias}")
