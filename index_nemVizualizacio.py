@@ -1,5 +1,4 @@
 import numpy as np
-import matplotlib.pyplot as plt
 
 x = np.array([
     [0,0],
@@ -16,7 +15,6 @@ y = np.array([
 
 learning_rate = 0.1
 epochs = 10000
-error_history = []
 
 weights_input_hidden = np.random.rand(2,2)
 bias_input_hidden = np.zeros((1,2))
@@ -33,8 +31,6 @@ for epoch in range(epochs):
     final_input = np.dot(hidden_output, weights_output_hidden) + bias_output_hidden
     final_output = calcSigmoid(final_input)
     err = y - final_output
-    mse = np.mean(err ** 2)
-    error_history.append(mse)
     d_output = err * (final_output * (1 - final_output))
     d_hidden = d_output.dot(weights_output_hidden.T) * (hidden_output * (1 - hidden_output))
     weights_output_hidden += hidden_output.T.dot(d_output) * learning_rate
@@ -42,24 +38,10 @@ for epoch in range(epochs):
     bias_output_hidden += np.sum(d_output, axis=0, keepdims=True) * learning_rate
     bias_input_hidden += np.sum(d_hidden, axis=0, keepdims=True) * learning_rate
     if epoch % 100 == 0:
-        print(f"Epoch: {epoch}\nMSE: {mse}\nError: {err}\nFinal output: {final_output}")
+        print(f"Epoch: {epoch}\nError: {err}\nFinal output: {final_output}")
 
 hidden_input = np.dot(x, weights_input_hidden) + bias_input_hidden
 hidden_output = calcSigmoid(hidden_input)
 final_input = np.dot(hidden_output, weights_output_hidden) + bias_output_hidden
 final_output = calcSigmoid(final_input)
 print(final_output)
-
-plt.plot(error_history)
-plt.title("Tanulasi hiba epochonkent")
-plt.xlabel("Epoch")
-plt.ylabel("MSE")
-plt.grid(True)
-plt.tight_layout()
-backend = plt.get_backend().lower()
-if "agg" in backend:
-    output_path = "tanulasi_hiba_index.png"
-    plt.savefig(output_path)
-    print(f"A grafikon el lett mentve ide: {output_path}")
-else:
-    plt.show()

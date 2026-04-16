@@ -229,7 +229,7 @@ final_output = [
 #   1. Kiszamolja a rejtett reteg bemenetet (bemeneti adathalmaz es rejtett reteg kozotti atmenet az 'x' bemeneti adathalmaz konstans matrixaval, a 'weights_input_hidden' sulyvektorok folyamatosan valtozo (epochs iteracioban modositjuk minden korben) matrixaval es a 'bias_input_hidden' folyamatosan valtozo (epochs iteracioban modositjuk minden korben) bias matrixaval)
 #   2. Elvegzi a rejtett reteg bemeneti adahalmazanak aktivaciojat (ahol a sigmoid fuggveny parametere a rejtett reteg bemeneti adathalmaza)
 #   3. Kiszamolja a rejtett reteg kimenetet (az elozo lepes visszateritesi erteke a bemeneti adathalmaz, tovabba felhasznaljuk a 'weights_output_hidden' sulyvektorok folyamatosan valtozo matrixat es a 'bias_output_hidden' folyamatosan valtozo bias matrixaval)
-#   4. Elvegzi a rejtett reteg kikemeti aktivaciojat (ahol a sigmoid fuggveny parametere a rejtett reteg kimeneti adathalmaza)
+#   4. Elvegzi a rejtett reteg kimeneti aktivaciojat (ahol a sigmoid fuggveny parametere a rejtett reteg kimeneti adathalmaza)
 #   5. Osszehasonlitja a neuralis halo vegso kimeneti adathalmazat (final_output) a target ertekek matrixaval (y) es megnezi, hogy mekkorat tevedett es egy valtozoban (err) elmentjuk az ertekeket
 #   6. A vegso kimeneti adathalmazt (final_output) es a rejtett reteget (weights_output_hidden) atalakitjuk (derivaljuk) es elmentjuk oket egy-egy uj valtozoba (d_output es d_hidden) annak erdekeben, hogy megnezzuk a hiba iranyat es merteket, ezaltal tudunk csak atmenni a kovetkezo lepesre
 #   7. A hiba alapjan visszafele modositjuk a valtozokat (weight matrixok es bias matrixok).
